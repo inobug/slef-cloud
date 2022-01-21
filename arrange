@@ -1,0 +1,134 @@
+安装python3
+yum install openssl-devel bzip2-devel expat-devel gdbm-devel readline-devel sqlite-devel
+yum install -y gcc
+
+cd /usr/local/src
+wget https://www.python.org/ftp/python/3.6.8/Python-3.6.8.tgz
+
+
+tar zxvf Python-3.6.8.tgz
+cd Python-3.6.8
+./configure --prefix=/usr/local/python3
+make && make install
+
+ln -s /usr/local/python3/bin/python3 /usr/bin/python3
+ln -s /usr/local/python3/bin/pip3 /usr/bin/pip3
+
+安装mysql
+
+https://www.cnblogs.com/starof/p/4680083.html
+# wget http://dev.mysql.com/get/mysql-community-release-el7-5.noarch.rpm
+# rpm -ivh mysql-community-release-el7-5.noarch.rpm
+# yum install mysql-community-server
+
+
+# service mysqld restart
+
+ mysql -u root 
+
+ set password for 'root'@'localhost' =password('123456');
+
+远程连接
+grant all privileges on *.* to root@'%'identified by '123456';
+关闭防火墙
+
+systemctl stop firewalld.service            #停止firewall
+systemctl disable firewalld.service        #禁止firewall开机启动
+
+创建数据库
+
+qualification_pre
+
+插入数据
+
+
+
+
+前端部署
+/root/shiyou/src/code/frontend/
+
+
+
+安装虚拟环境
+vim /etc/profile
+# 将下面内容添加到文件的最下面
+PATH=$PATH:/usr/local/python3/bin
+
+#是添加的进行生效命令
+source /etc/profile
+
+# 最后查看是否添加成功
+echo $pathmmk
+
+
+pip3 install virtualenv
+virtualenv shiyou
+source ~/shiyou/bin/activate
+
+
+安装nginx
+
+
+sudo yum install epel-release
+yum update
+
+sudo yum install -y nginx
+
+
+
+
+
+
+
+代码位置：
+git@codeup.aliyun.com:61826c0d404574409feabe8c/zt623/zsy.git
+
+系统centos7 保证python默认3.x
+
+前端部署：
+xxxxx
+将前端打包后的文件放入目录
+/root/shiyou/src/code/frontend/
+
+安装mysql：
+xxxxxxx
+
+导入数据
+sql文件在代码仓库中的 project/qualification_pre.sql
+
+安装nginx
+sudo yum install -y nginx
+
+安装 virtualenv
+pip install virtualenv
+virtualenv shiyou
+source ~/shiyou/bin/activate
+cd /root/shiyou/ (如果该目录不存在，则创建)
+midir src
+cd src
+mkdir prod
+cd prod
+git clone git@codeup.aliyun.com:61826c0d404574409feabe8c/zt623/zsy.git
+cd zsy/project/mysite
+pip install -r requirements.txt
+cd ..
+cp nginx.conf /etc/nginx/.
+cp conf.d/mysite.conf /etc/nginx/conf.d/.
+service nginx restart
+cd zsy/project/mysite/conf
+数据库用户名 写入 -> zsy/project/mysite/mysite/env.json V3 （默认的数据库用户名是root）
+数据库密码 写入 -> zsy/project/mysite/mysite/env.json V4 （默认的数据库密码是123456）
+uwsgi uwsgi.ini (如果重启的话，uwsgi --reload uwsgi.pid)
+
+cd zsy/project/
+crontab -e
+输入
+0 1 * * * sh filebak.sh > cron.log
+
+yum install inotify-tools -y
+
+
+
+
+
+
